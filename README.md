@@ -1,5 +1,5 @@
-# League Tracker Discord Bot
-League Tracker Discord Bot (LTDB) is a Discord bot to display stats for your League of Legends Profile.
+# VTX-Community-Bot
+VTX-Community-Bot is a Discord bot for the VTX Community to display tournaments in your region, show stats for League of Legends Profiles.
 
 ## Commands
 
@@ -14,6 +14,9 @@ Shows the current Champion rotation.
 
 ### /leaderboard [region]
 Displays the current top 10 highest ranked players in your region.
+
+### /tournament [game] | [region]
+Displays tournaments in a specific region
 
 ## Requirements
 - Java 21
