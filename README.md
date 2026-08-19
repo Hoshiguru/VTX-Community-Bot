@@ -20,6 +20,7 @@ Displays the current top 10 highest ranked players in your region.
 - Maven 3.9+
 - A Discord bot token (DO NOT SHARE WITH ANYONE!!!)
 - A Riot Games API key (DO NOT SHARE WITH ANYONE!!!)
+- A Start.gg API token (DO NOT SHARE WITH ANYONE!!!)
 
 ## Setup
 1. Clone the repository
@@ -38,6 +39,7 @@ src/main/resources/application.properties
 ```properties
 token.discord=YOUR_DISCORD_BOT_TOKEN
 token.riotGames=YOUR_RIOT_API_KEY
+token.startGG=YOUR_START_GG_API_TOKEN
 ```
 
 4. Build the project:
