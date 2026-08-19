@@ -1,5 +1,10 @@
 package org.example.tracker.startGG.models;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+
 public class TournamentModel {
 
     private String id;
@@ -7,15 +12,15 @@ public class TournamentModel {
     private String countryCode;
     private String startAt;
     private String url;
-    private String owner;
-    private String game;
+    private String city;
 
-    public TournamentModel(String id, String name, String countryCode, String startAt, String url) {
+    public TournamentModel(String id, String name, String countryCode, String startAt, String url, String city) {
         this.id = id;
         this.name = name;
         this.countryCode = countryCode;
         this.startAt = startAt;
         this.url = url;
+        this.city = city;
     }
 
     public String getId() {
@@ -43,7 +48,10 @@ public class TournamentModel {
     }
 
     public String getStartAt() {
-        return startAt;
+        LocalDateTime dateTime = LocalDateTime.ofInstant(Instant.ofEpochSecond(Long.parseLong(startAt)),
+                ZoneId.of("Europe/Zurich"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+        return dateTime.format(formatter);
     }
 
     public void setStartAt(String startAt) {
@@ -58,11 +66,11 @@ public class TournamentModel {
         this.url = url;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getCity() {
+        return city;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setCity(String city) {
+        this.city = city;
     }
 }
