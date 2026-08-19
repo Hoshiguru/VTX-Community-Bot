@@ -61,11 +61,7 @@ public class GGApiConnection {
                 .append("countryCode ")
                 .append("startAt ")
                 .append("url ")
-                .append("owner { ")
-                .append("player { ")
-                .append("gamerTag ")
-                .append("} ")
-                .append("} ")
+                .append("city")
                 .append("} ")
                 .append("} ")
                 .append("}");
@@ -117,15 +113,7 @@ public class GGApiConnection {
 
         for (JsonElement element : tournamentJson) {
             JsonObject tournamentObj = element.getAsJsonObject();
-
-            String ownerTag = tournamentObj
-                    .getAsJsonObject("owner")
-                    .getAsJsonObject("player")
-                    .get("gamerTag")
-                    .getAsString();
-            tournamentObj.remove("owner");
             TournamentModel tournamentModel = gson.fromJson(tournamentObj, TournamentModel.class);
-            tournamentModel.setOwner(ownerTag);
             tournaments.add(tournamentModel);
         }
         return tournaments;

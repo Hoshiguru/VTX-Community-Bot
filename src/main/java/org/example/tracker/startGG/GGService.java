@@ -30,7 +30,7 @@ public class GGService {
             for(TournamentModel tournament: tournaments){
                 stringBuilder.append("> ## ").append(tournament.getName()).append("\n")
                     .append("> Start at: ").append(tournament.getStartAt()).append("\n")
-                    .append("> Organizer: ").append(tournament.getOwner()).append("\n")
+                    .append("> City: ").append(tournament.getCity()).append("\n")
                     .append("> More infos/Register here: https://www.start.gg").append(tournament.getUrl()).append("\n");
             }
             return stringBuilder.toString();
