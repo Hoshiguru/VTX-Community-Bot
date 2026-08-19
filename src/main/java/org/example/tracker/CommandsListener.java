@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Properties;
 
 import org.example.tracker.lol.SummonerService;
+import org.example.tracker.startGG.GGService;
 
 import net.dv8tion.jda.api.entities.emoji.Emoji;
 import net.dv8tion.jda.api.events.interaction.command.CommandAutoCompleteInteractionEvent;
@@ -17,33 +18,36 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 public class CommandsListener extends ListenerAdapter {
 
     SummonerService summonerService;
+    GGService ggService;
 
     public CommandsListener(Properties properties) {
         summonerService = new SummonerService(properties);
+        ggService = new GGService(properties);
     }
 
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
         switch (event.getName()) {
-            case "ping":
-                event.reply("pong!").addActionRow(
+            case "ping" -> event.reply("pong!").addActionRow(
                         Button.primary("hollow purple", Emoji.fromFormatted("<a:JJKGojoWaving:860283604004372490>")))
                         .queue();
-                break;
-            case "stats":
+            case "stats" -> {
                 event.deferReply().queue();
                 event.getHook().sendMessage(summonerService.summonerStatsHandler(event)).queue();
-                break;
-            case "freechamps":
-                event.reply(summonerService.championHandler()).queue();
-                break;
-            case "leaderboard":
+            }
+            case "freechamps" -> event.reply(summonerService.championHandler()).queue();
+            case "leaderboard" -> {
                 event.deferReply().queue();
                 String reply = summonerService.leaderboard(event);
                 event.getHook().editOriginal(reply).queue();
-                break;
-            case "frames":
-                break;
+            }
+            case "frames" -> {
+            }
+            case "tournaments" -> {
+                event.deferReply().setSuppressEmbeds(true).queue();
+                String reply = ggService.tournamentsHandler(event);
+                event.getHook().editOriginal(reply).setSuppressEmbeds(true).queue();
+            }
         }
     }
 
@@ -53,14 +57,14 @@ public class CommandsListener extends ListenerAdapter {
             event.editMessage(":rightwards_pushing_hand_tone2::blue_circle:")
                     .delay(Duration.ofMillis(500))
                     .flatMap((it) -> it.editOriginal(
-                            ":rightwards_pushing_hand_tone2::blue_circle::red_circle::leftwards_pushing_hand_tone2:"))
+                    ":rightwards_pushing_hand_tone2::blue_circle::red_circle::leftwards_pushing_hand_tone2:"))
                     .delay(Duration.ofMillis(500))
                     .flatMap((it) -> it.editMessage(":pray_tone2:"))
                     .delay(Duration.ofMillis(500))
                     .flatMap((it) -> it.editMessage(":pinched_fingers_tone2::purple_circle:"))
                     .delay(Duration.ofMillis(500))
                     .flatMap((it) -> it
-                            .editMessage(":palm_up_hand_tone2:                                   :purple_circle:"))
+                    .editMessage(":palm_up_hand_tone2:                                   :purple_circle:"))
                     .queue();
         }
     }
